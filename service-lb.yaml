@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service # should not be written as small letter service 
+metadata: 
+  name: class24-lb
+spec: 
+  selector: 
+    app: nginx 
+  type: LoadBalancer
+  ports: 
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30045
+    protocol: TCP

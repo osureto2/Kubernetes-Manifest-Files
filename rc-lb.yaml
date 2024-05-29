@@ -1,0 +1,37 @@
+kind: ReplicationController
+apiVersion: v1
+metadata: 
+  name: demo-controller-lb
+  labels: 
+    name: demo
+spec: 
+ replicas: 2
+ selector: 
+   app: demo
+ template: 
+   metadata:
+     labels: 
+       app: demo 
+   spec: 
+     containers:
+     - image: liontechacademy/april23repo:nexus-v1
+       name: demo-controller-lb
+       ports: 
+       - containerPort: 8081
+         name: demo 
+
+---
+kind: Service
+apiVersion: v1
+metadata: 
+  labels: 
+    app: demo
+  name: demo
+spec: 
+  selector: 
+    app: demo
+  type: LoadBalancer
+  ports: 
+  - port: 8081 
+    protocol: TCP
+    targetPort: 8081
