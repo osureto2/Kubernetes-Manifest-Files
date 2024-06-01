@@ -1,12 +1,14 @@
 kind: Pod 
 apiVersion: v1 
 metadata: 
-  name: nginx
+  name: webapp 
+  namespace: dev
   labels: 
-    app: web 
+    app: web
+    tier: fe 
 spec: 
   containers: 
-  - name: nginx 
-    image: nginx 
+  - name: web 
+    image: mylandmarktech/maven-web-app 
     ports: 
-    - containerPort: 80
+    - containerPort: 8080
