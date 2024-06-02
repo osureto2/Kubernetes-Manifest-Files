@@ -5,7 +5,7 @@ metadata:
   labels: 
     name: demo
 spec: 
- replicas: 2
+ replicas: 3
  selector: 
    app: demo
  template: 
@@ -32,6 +32,6 @@ spec:
     app: demo
   type: LoadBalancer
   ports: 
-  - port: 8081 
+  - port: 80 
     protocol: TCP
     targetPort: 8081

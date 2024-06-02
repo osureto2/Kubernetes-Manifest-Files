@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+  name: sonarqube
+  labels: 
+    app: sona
+spec: 
+  replicas: 2
+  strategy: 
+    type: Recreate
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 1
+  # minReadySeconds: 30
+  selector: 
+    matchLabels: 
+      app: sona
+  template: 
+    metadata: 
+      name: sonarqube
+      labels: 
+        app: sona
+    spec: 
+      containers:
+      - name: sonar-container
+        image: liontechacademy/apps:sonarqube-v1.0.1
+        ports:
+        - containerPort: 9000
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sonar-svc
+  labels: 
+    app: sona
+spec: 
+  selector: 
+    app: sona
+  type: LoadBalancer
+  ports: 
+  - port: 80
+    targetPort: 9000
+    
